@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 
+// Type definitions for Sentiment and NSFW analysis results
+type Sentiment = {
+  label: string;
+  score: number;
+};
+
+type NSFW = {
+  label: string;
+  score: number;
+};
+
 export default function Home() {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
-  const [sentiment, setSentiment] = useState(null);
-  const [nsfw, setNsfw] = useState(null);
+  const [sentiment, setSentiment] = useState<Sentiment | null>(null);
+  const [nsfw, setNsfw] = useState<NSFW | null>(null);
   const [loading, setLoading] = useState(false);
   const [context, setContext] = useState("");
   const [contextUpdateStatus, setContextUpdateStatus] = useState("");
@@ -79,8 +90,8 @@ export default function Home() {
       <h1>Chat with BERT</h1>
 
       <textarea
-        rows="4"
-        cols="50"
+        rows={4}
+        cols={50}
         placeholder="Type your message here..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -123,8 +134,8 @@ export default function Home() {
 
       <h2>Update Context</h2>
       <textarea
-        rows="4"
-        cols="50"
+        rows={4}
+        cols={50}
         placeholder="Enter new context here..."
         value={context}
         onChange={(e) => setContext(e.target.value)}
